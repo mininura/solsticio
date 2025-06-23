@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cuadro con botones</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom vivid reds and pinks palette */
+    :root {
+      --color1: #f3aacb;
+      --color2: #f7bfd8;
+      --color3: #fbd5e5;
+      --color4: #fdeaf2;
+      --vivid-red: #e63946;
+      --vivid-pink: #fc2c85;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--color4), var(--color2));
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      background: var(--color3);
+      border-radius: 24px;
+      box-shadow:
+        4px 4px 14px rgba(239, 130, 170,0.4),
+        -4px -4px 14px rgba(255, 255, 255,0.8);
+      max-width: 450px;
+      width: 100%;
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .image-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--color1);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 4px 4px 12px #f7bfd8, inset -4px -4px 12px #fdeaf2;
+      cursor: pointer;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .upload-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      color: #a0386b;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px #fff;
+      user-select: none;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+    }
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .btn {
+      flex: 1;
+      text-align: center;
+      background: var(--vivid-pink);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 0.65rem 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 4px 8px rgba(252, 44, 133, 0.4),
+        inset 0 -3px 6px rgb(215 14 72 / 0.9);
+      user-select: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn:hover {
+      background: var(--vivid-red);
+      box-shadow:
+        0 6px 14px rgba(230, 57, 70, 0.6),
+        inset 0 -4px 8px rgb(230 57 70 / 1);
+      transform: scale(1.05);
+      color: #fff6fb;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+      box-shadow:
+        0 2px 6px rgba(230, 57, 70, 0.5),
+        inset 0 -3px 6px rgb(230 57 70 / 1);
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Cuadro principal con botones">
+    <div class="image-box" aria-label="Cuadro para colocar imagen">
+      <input type="file" id="img-upload" accept="image/*" aria-describedby="upload-desc" />
+      <span class="upload-label" id="upload-desc">Haz click para subir una imagen</span>
+      <img id="preview" alt="Vista previa de la imagen subida" hidden / src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/24203120-3719-4d84-968c-4a7ac088ee38.png">
+    </div>
+    <div class="buttons">
+      <a href="https://pin.it/6YoK356AZ" target="_blank" rel="noopener noreferrer" class="btn" role="button" aria-label="Botón Sangre Fresca">Sangre fresca</a>
+      <a href="https://telegra.ph/10462a-03-13" target="_blank" rel="noopener noreferrer" class="btn" role="button" aria-label="Botón Bombardeo">Bombardeo</a>
+    </div>
+  </main>
+
+  <script>
+    const inputFile = document.getElementById('img-upload');
+    const previewImg = document.getElementById('preview');
+    const uploadLabel = document.querySelector('.upload-label');
+
+    inputFile.addEventListener('change', () => {
+      if (!inputFile.files || !inputFile.files[0]) return;
+
+      const file = inputFile.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewImg.hidden = false;
+        uploadLabel.style.display = 'none';
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
+
