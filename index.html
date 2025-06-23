@@ -3,165 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cuadro con botones</title>
+  <title>Diseño Rojo-Rosado</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom vivid reds and pinks palette */
+    /* Custom colors based on the palette */
     :root {
-      --color1: #f3aacb;
-      --color2: #f7bfd8;
-      --color3: #fbd5e5;
-      --color4: #fdeaf2;
-      --vivid-red: #e63946;
-      --vivid-pink: #fc2c85;
+      --color-1: #f3aacb;
+      --color-2: #f7bfd8;
+      --color-3: #fbd5e5;
+      --color-4: #fdeaf2;
+      --color-red-vivid: #e11d48; /* A vivid saturated red from Tailwind red-600 */
+      --color-pink-vivid: #ec4899; /* A vivid saturated pink from Tailwind pink-500 */
     }
 
     body {
-      background: linear-gradient(135deg, var(--color4), var(--color2));
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-    }
-
-    .container {
-      background: var(--color3);
-      border-radius: 24px;
-      box-shadow:
-        4px 4px 14px rgba(239, 130, 170,0.4),
-        -4px -4px 14px rgba(255, 255, 255,0.8);
-      max-width: 450px;
-      width: 100%;
-      padding: 2rem 2.5rem;
+      background: var(--color-4);
+      margin: 0; padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.8rem;
+      min-height: 100vh;
     }
 
-    .image-box {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--color1);
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 4px 4px 12px #f7bfd8, inset -4px -4px 12px #fdeaf2;
-      cursor: pointer;
-    }
-
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 16px;
-      pointer-events: none;
-    }
-
-    .upload-label {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      color: #a0386b;
-      font-weight: 600;
-      text-shadow: 1px 1px 3px #fff;
-      user-select: none;
-    }
-
-    input[type="file"] {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-    }
-
-    .buttons {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .btn {
-      flex: 1;
-      text-align: center;
-      background: var(--vivid-pink);
-      color: white;
-      border: none;
-      border-radius: 100px;
-      padding: 0.65rem 0;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
+    .image-container {
+      width: 400px;
+      height: 250px;
+      background: linear-gradient(135deg, var(--color-1), var(--color-3));
+      border-radius: 12px;
       box-shadow:
-        0 4px 8px rgba(252, 44, 133, 0.4),
-        inset 0 -3px 6px rgb(215 14 72 / 0.9);
-      user-select: none;
-      cursor: pointer;
-      text-decoration: none;
+        0 0 8px var(--color-pink-vivid),
+        inset 0 0 12px var(--color-2);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 2.5rem;
+      border: 4px solid var(--color-pink-vivid);
+      transition: border-color 0.3s ease;
+    }
+    .image-container:hover {
+      border-color: var(--color-red-vivid);
+    }
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
-    .btn:hover {
-      background: var(--vivid-red);
+    .buttons-wrapper {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--color-red-vivid);
+      color: white;
+      padding: 0.6rem 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 40px;
+      border: 2px solid var(--color-pink-vivid);
+      cursor: pointer;
+      transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
       box-shadow:
-        0 6px 14px rgba(230, 57, 70, 0.6),
-        inset 0 -4px 8px rgb(230 57 70 / 1);
-      transform: scale(1.05);
-      color: #fff6fb;
+        0 4px 8px rgb(225 29 72 / 0.7);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      user-select: none;
     }
-
+    .btn:hover, .btn:focus {
+      background: var(--color-pink-vivid);
+      border-color: var(--color-red-vivid);
+      color: white;
+      outline: none;
+      box-shadow:
+        0 6px 12px rgb(236 72 153 / 0.9);
+    }
     .btn:active {
-      transform: scale(0.95);
-      box-shadow:
-        0 2px 6px rgba(230, 57, 70, 0.5),
-        inset 0 -3px 6px rgb(230 57 70 / 1);
+      background: var(--color-red-vivid);
+      box-shadow: 0 2px 5px rgb(225 29 72 / 0.8);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .image-container {
+        width: 90vw;
+        height: 35vw;
+      }
+      .buttons-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .btn {
+        min-width: auto;
+        width: 60vw;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="container" role="main" aria-label="Cuadro principal con botones">
-    <div class="image-box" aria-label="Cuadro para colocar imagen">
-      <input type="file" id="img-upload" accept="image/*" aria-describedby="upload-desc" />
-      <span class="upload-label" id="upload-desc">Haz click para subir una imagen</span>
-      <<img src="https://co.pinterest.com/pin/778559854365674051/" alt="Descripción de la imagen" />
-    </div>
-    <div class="buttons">
-      <a href="https://pin.it/6YoK356AZ" target="_blank" rel="noopener noreferrer" class="btn" role="button" aria-label="Botón Sangre Fresca">Sangre fresca</a>
-      <a href="https://telegra.ph/10462a-03-13" target="_blank" rel="noopener noreferrer" class="btn" role="button" aria-label="Botón Bombardeo">Bombardeo</a>
-    </div>
-  </main>
+  <div class="image-container" id="image-container">
+    <img src="https://i.pinimg.com/564x/b5/f1/97/b5f197a2114defcbb2154a5e773720ef.jpg" alt="Imagen personalizada" id="main-image"/>
+  </div>
+
+  <div class="buttons-wrapper">
+    <a class="btn" href="https://pin.it/6YoK356AZ" target="_blank" rel="noopener noreferrer" aria-label="sangre fresca">sangre fresca</a>
+    <a class="btn" href="https://telegra.ph/10462a-03-13" target="_blank" rel="noopener noreferrer" aria-label="bombardeo">bombardeo</a>
+  </div>
 
   <script>
-    const inputFile = document.getElementById('img-upload');
-    const previewImg = document.getElementById('preview');
-    const uploadLabel = document.querySelector('.upload-label');
-
-    inputFile.addEventListener('change', () => {
-      if (!inputFile.files || !inputFile.files[0]) return;
-
-      const file = inputFile.files[0];
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        previewImg.src = e.target.result;
-        previewImg.hidden = false;
-        uploadLabel.style.display = 'none';
-      };
-
-      reader.readAsDataURL(file);
-    });
+    // Optional: You can dynamically update the image by changing the src of #main-image from JS here
+    // Example:
+    // document.getElementById('main-image').src = 'your-new-image-url.jpg';
   </script>
 </body>
 </html>
